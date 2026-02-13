@@ -8,9 +8,9 @@ Característica: Login en SauceDemo
   @exitoso @critical
   Esquema del escenario: proceso de login exitoso
     Dado abre la aplicacion
-    Y el usuario inicia sesion con perfil "<perfil>" y es responsable de caja de tipo "<tipo>"
+    y el usuario ingresa su "<usuario>" y "<password>"
     Entonces el usuario deberia ver la pagina de productos
 
     Ejemplos:
-      | perfil        | tipo   |
-      | standard_user | normal |
+      | usuario       | password     |
+      | standard_user | secret_sauce |

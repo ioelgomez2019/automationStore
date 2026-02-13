@@ -15,13 +15,8 @@ class Login:
     
     def abrirAplicacion(self):
         self.login_page.open()
-    
-    def loginPorPerfil(self, perfil):
-        username = perfil
-        password = PASSWORD_VALIDA
-        self.login_page.enter_username(username)
+
+    def loginConCredenciales(self, usuario, password):
+        self.login_page.enter_username(usuario)
         self.login_page.enter_password(password)
         self.login_page.click_login_button()
-    
-    def ingresarCore(self):
-        return None

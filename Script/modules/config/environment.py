@@ -15,6 +15,32 @@ def create_driver():
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-translate")
+
+    disable_password_manager = os.environ.get("DISABLE_PASSWORD_MANAGER", "1") == "1"
+    use_temp_profile = os.environ.get("USE_TEMP_PROFILE", "1") == "1"
+
+    if disable_password_manager:
+        options.add_argument("--disable-save-password-bubble")
+        options.add_argument("--disable-features=PasswordLeakDetection")
+        prefs = {
+            "credentials_enable_service": False,
+            "profile.password_manager_enabled": False,
+            "profile.password_manager_leak_detection": False,
+            "translate_whitelists": {},
+            "translate_blocked_languages": ["es", "en"],
+        }
+        try:
+            options.add_experimental_option("prefs", prefs)
+        except Exception:
+            pass
+
+    if use_temp_profile:
+        try:
+            temp_profile = Path(os.environ.get("TEMP", "")) / "selenium-profile"
+            options.add_argument(f"--user-data-dir={temp_profile}")
+        except Exception:
+            pass
     try:
         return webdriver.Chrome(options=options)
     except OSError as exc:

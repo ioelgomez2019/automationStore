@@ -9,14 +9,12 @@ def step_open_app(context):
     context.login_logic.abrirAplicacion()
 
 
-@given('el usuario inicia sesion con perfil "{perfil}" y es responsable de caja de tipo "{tipoResponsableCaja}"')
-def step_login_profile(context, perfil, tipoResponsableCaja):
+@given('el usuario ingresa su "{usuario}" y "{password}"')
+def step_login_profile(context, usuario, password):
     context.login_logic = Login(context)
     context.login_logic.prepararScenario()
     context.login_logic.abrirAplicacion()
-    context.login_logic.esResponsableCaja = tipoResponsableCaja
-    context.login_logic.loginPorPerfil(perfil)
-    context.login_logic.ingresarCore()
+    context.login_logic.loginConCredenciales(usuario, password)
 
 
 @then("el usuario deberia ver la pagina de productos")
