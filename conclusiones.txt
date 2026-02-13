@@ -1,0 +1,35 @@
+CONCLUSIONES - AUTOTESTSTORE
+============================
+
+Hallazgos
+---------
+1) Rendimiento
+- La demora principal en "Add to cart" venia de esperas encadenadas (waits largos en cascada).
+- Se mejoro el tiempo de ejecucion al priorizar busquedas rapidas y usar esperas solo como fallback.
+
+2) Mantenibilidad
+- La arquitectura BDD + POM esta bien separada por capas, lo que reduce el acoplamiento.
+- Los escenarios son claros y el codigo de pagina es reutilizable.
+
+3) Operatividad
+- Los usuarios no tecnicos necesitaban ejecucion "one-click".
+- Se resolvio con scripts .bat/.ps1 y setups automaticos por sistema operativo.
+
+4) Evidencia
+- Los reportes HTML son suficientes para auditoria basica y soporte.
+- Los reportes centralizan errores y pasos ejecutados, lo cual acelera el diagnostico de preubas en la etapa de pruebas de regresion.
+
+Conclusiones
+------------
+- La suite es estable para una version beta: cubre login y checkout con criterios claros.
+- El rendimiento es aceptable para E2E, evitando esperas innecesarias.
+- El flujo de instalacion quedo estandarizado, reduciendo dependencias manuales.
+- La experiencia de ejecucion es simple, apta para perfiles no tecnicos.
+
+Recomendaciones
+--------------
+- Mantener versiones fijadas de dependencias para evitar drift.
+- Incluir smoke tests en pipeline de CI cuando se habilite automatizacio, que podriamos implementar con jekisn en un servidor docker.
+- Revisar periodicamente la compatibilidad con versiones nuevas de Chrome/driver.
+- Seguir agregando escenarios negativos para mejorar cobertura funcional.
+- Si nos pudieramos conectar a una base de datos se puede usar los clientes en aleatorio para el ingreso al sistema y luego escalar a mas pruebas e2e completas.
