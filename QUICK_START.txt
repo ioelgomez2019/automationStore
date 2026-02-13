@@ -1,0 +1,95 @@
+================================================================================
+   AUTOTESTSTORE - GUIA RAPIDA DE EJECUCION
+================================================================================
+
+SCRIPTS DISPONIBLES:
+-------------------
+
+1. test_e2e_login.bat
+   └─ Ejecuta tests de autenticación
+   └─ Genera reporte en: reports/test_e2e_login.html
+   └─ Uso: test_e2e_login.bat
+
+2. test_e2e_comprar_producto.bat
+   └─ Ejecuta flujo completo de compra (login → carrito → checkout)
+   └─ Genera reporte en: reports/test_e2e_compra.html
+   └─ Uso: test_e2e_comprar_producto.bat
+
+3. test_e2e_todos.bat
+   └─ Ejecuta TODOS los tests (login + checkout)
+   └─ Genera reporte en: reports/behave_report.html
+   └─ Uso: test_e2e_todos.bat
+
+4. test_e2e_smoke.bat
+   └─ Ejecuta solo tests críticos (@smoke)
+   └─ Más rápido: ~5-10 segundos
+   └─ Uso: test_e2e_smoke.bat
+
+SCRIPTS POWERSHELL (AVANZADO):
+-----------------------------
+
+Los mismos archivos .ps1 con opciones adicionales:
+
+   .\test_e2e_login.ps1 -Verbose
+   .\test_e2e_comprar_producto.ps1 -NoReport
+   .\test_e2e_todos.ps1 -Parallel
+
+INSTALACION PREVIA (una sola vez):
+----------------------------------
+
+1. Abrir PowerShell como Administrador
+
+2. Ejecutar:
+   python -m venv venv
+   venv\Scripts\activate
+   pip install -r requirements.txt
+
+3. Verificar:
+   behave --version
+   (debería mostrar: behave 1.2.6+)
+
+ESTRUCTURA:
+-----------
+
+Scenarios/
+  ├── login/
+  │   └── login.feature         → Casos de login
+  └── checkout/
+      └── checkout.feature      → Casos de compra
+
+Script/modules/features/
+  ├── login/                    → Código de login
+  └── checkout/                 → Código de compra
+
+REPORTES:
+---------
+
+Después de ejecutar cualquier test, los reportes HTML se guardan en:
+  reports/test_e2e_*.html
+
+Abrir en navegador para ver detalles completos de ejecución.
+
+TROUBLESHOOTING:
+----------------
+
+✗ "No reconoce el comando behave":
+  → Activar virtualenv: venv\Scripts\activate
+
+✗ "Chrome no encontrado":
+  → Instalar Chrome desde https://www.google.com/chrome/
+
+✗ "Element not found":
+  → Revisar reporte HTML en la sección Error Message
+  → Screenshots estarán disponibles
+
+CONTACTO / ESCALACION:
+---------------------
+
+Para dudas:
+1. Revisar DOCUMENTACION_PROYECTO.md (guía completa)
+2. Ejecutar con -Verbose para ver logs detallados
+3. Revisar reportes HTML con error details
+
+================================================================================
+Última actualización: Febrero 2026
+================================================================================

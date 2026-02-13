@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from Script.modules.utils.loginUtils import BasePage
 
@@ -11,11 +13,27 @@ class InventoryPage(BasePage):
     INVENTORY_CONTAINER = (By.ID, "inventory_container")
 
     def wait_for_page(self):
+        """Verifica rápido si los elementos ya existen, sino espera"""
+        try:
+            # Intento rápido sin wait
+            self.driver.find_element(*self.PRODUCTS_TITLE)
+            self.driver.find_element(*self.INVENTORY_CONTAINER)
+            if "inventory.html" in self.driver.current_url:
+                return
+        except Exception:
+            pass
+        
+        # Si no están, usa wait (máximo una vez)
         self.find_element(self.PRODUCTS_TITLE)
         self.find_element(self.INVENTORY_CONTAINER)
         self.wait.until(lambda d: "inventory.html" in d.current_url)
 
     def wait_for_inventory(self):
+        """Verifica rápido si hay items, sino espera"""
+        elements = self.driver.find_elements(*self.INVENTORY_ITEM)
+        if elements:
+            return
+        # Solo espera si no encontró
         self.find_element(self.INVENTORY_ITEM)
 
     def clear_cart(self):
@@ -49,34 +67,26 @@ class InventoryPage(BasePage):
             button_id = product_ids[product_name]
             remove_id = button_id.replace("add-to-cart", "remove")
             
-            # Primero verifica si ya está en el carrito (botón "Remove")
+            # Intento super rápido: busca directamente sin wait
             try:
-                remove_button = self.driver.find_element(By.CSS_SELECTOR, f"button[data-test='{remove_id}']")
-                if remove_button.is_displayed():
-                    print(f"✓ Producto '{product_name}' ya está en el carrito")
-                    return "already_added"
+                # ¿Ya está agregado?
+                self.driver.find_element(By.CSS_SELECTOR, f"button[data-test='{remove_id}']")
+                return "already_added"
             except Exception:
                 pass
             
-            # Intenta encontrar el botón "Add to cart" con data-test
+            # Busca el botón add
             try:
-                button = self.wait.until(
-                    lambda d: d.find_element(By.CSS_SELECTOR, f"button[data-test='{button_id}']")
-                )
-                return button
+                return self.driver.find_element(By.CSS_SELECTOR, f"button[data-test='{button_id}']")
             except Exception:
                 pass
             
-            # Intenta con ID
             try:
-                button = self.wait.until(
-                    lambda d: d.find_element(By.ID, button_id)
-                )
-                return button
+                return self.driver.find_element(By.ID, button_id)
             except Exception:
                 pass
 
-        # Fallback con XPath - verifica ambos botones
+        # Fallback con XPath - búsqueda rápida sin wait primero
         xpath_add = (
             f"//div[contains(@class,'inventory_item_name') and normalize-space()='{product_name}']"
             f"/ancestor::div[@class='inventory_item_description']"
@@ -89,10 +99,9 @@ class InventoryPage(BasePage):
         )
         
         try:
-            # Verifica si tiene botón Remove
+            # Verifica rápido si tiene botón Remove
             remove_elements = self.driver.find_elements(By.XPATH, xpath_remove)
             if remove_elements and remove_elements[0].is_displayed():
-                print(f"✓ Producto '{product_name}' ya está en el carrito")
                 return "already_added"
             
             # Busca el botón Add
@@ -118,14 +127,10 @@ class InventoryPage(BasePage):
         if "inventory.html" not in self.driver.current_url:
             raise TimeoutException(f"Not on inventory page. URL: {self.driver.current_url}")
         
-        element = None
-        for _ in range(3):
-            element = self._find_add_button(product_name)
-            if element is not None:
-                break
-        
         # Si el producto ya está agregado, no es un error
+        element = self._find_add_button(product_name)
         if element == "already_added":
+            print(f"✓ Producto '{product_name}' ya estaba en el carrito")
             return
         
         if element is None:
@@ -135,6 +140,7 @@ class InventoryPage(BasePage):
                     button = self.find_element((By.XPATH, "//button[starts-with(@id,'add-to-cart') or contains(@data-test,'add-to-cart')]"))
                     button.click()
                     self.driver.back()
+                    print(f"✓ Producto '{product_name}' agregado desde detalle")
                     return
                 except Exception:
                     pass
@@ -149,8 +155,10 @@ class InventoryPage(BasePage):
         self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
         try:
             element.click()
-        except Exception:
+            print(f"✓ Producto '{product_name}' agregado al carrito")
+        except Exception as e:
             self.driver.execute_script("arguments[0].click();", element)
+            print(f"✓ Producto '{product_name}' agregado al carrito (JS click)")
 
     def open_cart(self):
         self.click_element(self.CART_LINK)
