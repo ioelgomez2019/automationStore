@@ -1,109 +1,11 @@
 @login @smoke
-Característica: Login en SauceDemo # features/login.feature:6
+Característica: Login en SauceDemo # Scenarios/login/login.feature:3
   Como usuario de SauceDemo
-  Quiero poder iniciar sesión en la plataforma
+  Quiero poder iniciar sesion en la plataforma
   Para acceder a las funcionalidades del sistema
-  Antecedentes:   # features/login.feature:11
-
   @exitoso @critical
-  Escenario: Login exitoso con credenciales válidas                # features/login.feature:15
-    Dado que el usuario está en la página de login de SauceDemo    # None
-    Cuando el usuario ingresa el nombre de usuario "standard_user" # None
-    Y el usuario ingresa la contraseña "secret_sauce"              # None
-    Y el usuario hace clic en el botón de login                    # None
-    Entonces el usuario debería ver la página de productos         # None
-    Y el título de la página debería ser "PRODUCTS"                # None
-
-  @exitoso
-  Escenario: Login exitoso con usuario problem_user               # features/login.feature:23
-    Dado que el usuario está en la página de login de SauceDemo   # None
-    Cuando el usuario ingresa el nombre de usuario "problem_user" # None
-    Y el usuario ingresa la contraseña "secret_sauce"             # None
-    Y el usuario hace clic en el botón de login                   # None
-    Entonces el usuario debería ver la página de productos        # None
-
-  @error @negative
-  Escenario: Login fallido con credenciales inválidas                           # features/login.feature:30
-    Dado que el usuario está en la página de login de SauceDemo                 # None
-    Cuando el usuario ingresa el nombre de usuario "usuario_invalido"           # None
-    Y el usuario ingresa la contraseña "password_incorrecto"                    # None
-    Y el usuario hace clic en el botón de login                                 # None
-    Entonces el usuario debería ver un mensaje de error                         # None
-    Y el mensaje de error debería contener "Username and password do not match" # None
-
-  @error @negative
-  Escenario: Login con usuario bloqueado                             # features/login.feature:38
-    Dado que el usuario está en la página de login de SauceDemo      # None
-    Cuando el usuario ingresa el nombre de usuario "locked_out_user" # None
-    Y el usuario ingresa la contraseña "secret_sauce"                # None
-    Y el usuario hace clic en el botón de login                      # None
-    Entonces el usuario debería ver un mensaje de error              # None
-    Y el mensaje de error debería contener "locked out"              # None
-
-  @validacion @negative
-  Escenario: Login sin ingresar nombre de usuario                 # features/login.feature:46
-    Dado que el usuario está en la página de login de SauceDemo   # None
-    Cuando el usuario deja el campo de usuario vacío              # None
-    Y el usuario ingresa la contraseña "secret_sauce"             # None
-    Y el usuario hace clic en el botón de login                   # None
-    Entonces el usuario debería ver un mensaje de error           # None
-    Y el mensaje de error debería contener "Username is required" # None
-
-  @validacion @negative
-  Escenario: Login sin ingresar contraseña                         # features/login.feature:54
-    Dado que el usuario está en la página de login de SauceDemo    # None
-    Cuando el usuario ingresa el nombre de usuario "standard_user" # None
-    Y el usuario deja el campo de contraseña vacío                 # None
-    Y el usuario hace clic en el botón de login                    # None
-    Entonces el usuario debería ver un mensaje de error            # None
-    Y el mensaje de error debería contener "Password is required"  # None
-
-  @validacion @negative
-  Escenario: Login sin ingresar credenciales                      # features/login.feature:62
-    Dado que el usuario está en la página de login de SauceDemo   # None
-    Cuando el usuario deja el campo de usuario vacío              # None
-    Y el usuario deja el campo de contraseña vacío                # None
-    Y el usuario hace clic en el botón de login                   # None
-    Entonces el usuario debería ver un mensaje de error           # None
-    Y el mensaje de error debería contener "Username is required" # None
-
-  @parametrizado
-  Esquema del escenario: Login con diferentes usuarios -- @1.1     # features/login.feature:78
-    Dado que el usuario está en la página de login de SauceDemo    # None
-    Cuando el usuario ingresa el nombre de usuario "standard_user" # None
-    Y el usuario ingresa la contraseña "secret_sauce"              # None
-    Y el usuario hace clic en el botón de login                    # None
-    Entonces el resultado del login debería ser "exitoso"          # None
-
-  @parametrizado
-  Esquema del escenario: Login con diferentes usuarios -- @1.2    # features/login.feature:79
-    Dado que el usuario está en la página de login de SauceDemo   # None
-    Cuando el usuario ingresa el nombre de usuario "problem_user" # None
-    Y el usuario ingresa la contraseña "secret_sauce"             # None
-    Y el usuario hace clic en el botón de login                   # None
-    Entonces el resultado del login debería ser "exitoso"         # None
-
-  @parametrizado
-  Esquema del escenario: Login con diferentes usuarios -- @1.3               # features/login.feature:80
-    Dado que el usuario está en la página de login de SauceDemo              # None
-    Cuando el usuario ingresa el nombre de usuario "performance_glitch_user" # None
-    Y el usuario ingresa la contraseña "secret_sauce"                        # None
-    Y el usuario hace clic en el botón de login                              # None
-    Entonces el resultado del login debería ser "exitoso"                    # None
-
-  @parametrizado
-  Esquema del escenario: Login con diferentes usuarios -- @1.4       # features/login.feature:81
-    Dado que el usuario está en la página de login de SauceDemo      # None
-    Cuando el usuario ingresa el nombre de usuario "locked_out_user" # None
-    Y el usuario ingresa la contraseña "secret_sauce"                # None
-    Y el usuario hace clic en el botón de login                      # None
-    Entonces el resultado del login debería ser "error"              # None
-
-  @parametrizado
-  Esquema del escenario: Login con diferentes usuarios -- @1.5        # features/login.feature:82
-    Dado que el usuario está en la página de login de SauceDemo       # None
-    Cuando el usuario ingresa el nombre de usuario "usuario_invalido" # None
-    Y el usuario ingresa la contraseña "pass_invalido"                # None
-    Y el usuario hace clic en el botón de login                       # None
-    Entonces el resultado del login debería ser "error"               # None
+  Esquema del escenario: proceso de login exitoso -- @1.1                                           # Scenarios/login/login.feature:16
+    Dado abre la aplicacion                                                                         # Script/modules/features/login/loginStep.py:5
+    Y el usuario inicia sesion con perfil "standard_user" y es responsable de caja de tipo "normal" # Script/modules/features/login/loginStep.py:12
+    Entonces el usuario deberia ver la pagina de productos                                          # Script/modules/features/login/loginStep.py:22
 

@@ -1,10 +1,11 @@
 from selenium.webdriver.common.by import By
-from pages.base_page import BasePage
+from Script.modules.utils.loginUtils import BasePage
+from Script.modules.constants.loginConstants import URL_LOGIN
 
 
 class LoginPage(BasePage):
     
-    URL = "https://www.saucedemo.com/"
+    URL = URL_LOGIN
     
     USERNAME_INPUT = (By.ID, "user-name")
     PASSWORD_INPUT = (By.ID, "password")
