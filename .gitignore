@@ -1,37 +1,36 @@
-# Archivos y carpetas a ignorar por Git
-# Si usas control de versiones
-
 # Entorno virtual
 venv/
 env/
 ENV/
+.venv/
 
 # Cache de Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
-
-# Archivos de prueba
 .pytest_cache/
+*.pyc
+*.pyo
+
+# Cobertura
 .coverage
 htmlcov/
 *.log
 
-# Reportes
-report.html
-reports/
-assets/
+# Reportes generados (se regeneran automáticamente)
+reports/*.html
+reports/*.json
 
 # Behave
 allure-results/
 allure-report/
-*.json
-*.xml
+.behave/
 
 # Screenshots de fallos
 screenshot_*.png
 screenshots/
+add_to_cart*.png
 
 # IDE
 .vscode/
@@ -39,11 +38,33 @@ screenshots/
 *.swp
 *.swo
 *~
+*.sublime-project
+*.sublime-workspace
 
 # Sistema operativo
 .DS_Store
 Thumbs.db
+Desktop.ini
 
 # Archivos temporales
 *.tmp
 *.bak
+*.temp
+*~
+pretty.output
+
+# Archivos de configuración local
+.env.local
+.env.*.local
+
+# Windows
+desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.AppleDouble
+.LSOverride
+
+# Archivos innecesarios
+testee.py
+test_debug.py
