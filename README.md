@@ -134,8 +134,11 @@ AutoTestStore/
 
 ```powershell
 git clone https://github.com/ioelgomez2019/automationStore.git
-cd AutoTestStore
+cd automationStore
+code .
 ```
+
+abrir en visual studio para no tener dependecia de administrador
 
 **Opción B: Sin Git (Descarga manual)**
 
