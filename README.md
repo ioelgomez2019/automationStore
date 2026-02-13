@@ -460,4 +460,3 @@ start reports/behave_report.html
 **¡Feliz Testing! 🎉**
 
 Si tienes preguntas o encuentras problemas, revisa la sección de solución de problemas o consulta la documentación oficial de Selenium y Behave.
-# automationStore
