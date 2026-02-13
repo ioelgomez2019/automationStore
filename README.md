@@ -191,10 +191,10 @@ behave --dry-run
 # Output: Sin errores
 ```
 
-### Paso 5: Verificar Chrome
+### Paso 5: Verificar Chrome (isntalar )
 
 ```powershell
-ls "C:\Program Files\Google\Chrome\Application\chrome.exe"
+pip install selenium webdriver-manager
 
 # Si falta: https://www.google.com/chrome/
 ```
@@ -205,7 +205,7 @@ ls "C:\Program Files\Google\Chrome\Application\chrome.exe"
 
 ### Opción 1: Scripts Ejecutables (RECOMENDADO)
 
-**Hacer doble click desde File Explorer:**
+**Hacer doble click desde File Explorer:** //preferible no ejecutar
 
 ```powershell
 test_e2e_login.bat               # Solo login
@@ -214,7 +214,25 @@ test_e2e_todos.bat               # Todos los tests
 test_e2e_smoke.bat               # Tests críticos (rápido)
 ```
 
-**O desde PowerShell:**
+**O desde PowerShell:**// ejecutar
+```powershell
+venv\Scripts\
+
+# Todos sin repotes
+behave
+
+# Con reporte HTML / lo encuentras en  carpeta reporots
+behave -f behave_html_formatter:HTMLFormatter -o reports/behave_report.html
+
+# Solo críticos
+behave --tags=@smoke
+
+
+# Tests específicos
+behave Scenarios/login/login.feature
+behave Scenarios/checkout/checkout.feature
+
+### Opción 2: Comando Directo
 
 ```powershell
 # Activar virtualenv
@@ -226,24 +244,6 @@ venv\Scripts\activate
 # Con opciones
 .\test_e2e_comprar_producto.ps1 -Verbose
 .\test_e2e_todos.ps1 -Parallel
-```
-
-### Opción 2: Comando Directo
-
-```powershell
-venv\Scripts\activate
-
-# Tests específicos
-behave Scenarios/login/login.feature
-
-# Todos
-behave
-
-# Con reporte HTML
-behave -f behave_html_formatter:HTMLFormatter -o reports/behave_report.html
-
-# Solo críticos
-behave --tags=@smoke
 ```
 
 ### Ejemplo Completo

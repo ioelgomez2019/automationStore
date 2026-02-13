@@ -15,3 +15,13 @@ Característica: Compra en SauceDemo # Scenarios/checkout/checkout.feature:3
     Y hace click en finish que finaliza la compra                               # Script/modules/features/checkout/checkoutStep.py:51
     Entonces deberia ver la confirmacion "Thank you for your order!"            # Script/modules/features/checkout/checkoutStep.py:56
 
+@login @smoke
+Característica: Login en SauceDemo # Scenarios/login/login.feature:3
+  Como usuario de SauceDemo
+  Quiero poder iniciar sesion en la plataforma
+  Para acceder a las funcionalidades del sistema
+  @exitoso @critical
+  Esquema del escenario: proceso de login exitoso -- @1.1    # Scenarios/login/login.feature:16
+    Dado abre la aplicacion                                  # Script/modules/features/login/loginStep.py:5
+    Y el usuario ingresa su "standard_user" y "secret_sauce" # Script/modules/features/login/loginStep.py:12
+    Entonces el usuario deberia ver la pagina de productos   # Script/modules/features/login/loginStep.py:20
