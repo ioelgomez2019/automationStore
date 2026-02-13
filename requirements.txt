@@ -1,0 +1,29 @@
+# Dependencias del proyecto de automatización
+# Para instalar todas las dependencias ejecuta: pip install -r requirements.txt
+
+# Selenium - Framework de automatización web
+selenium==4.16.0
+
+# WebDriver Manager - Gestiona los drivers de navegadores automáticamente
+webdriver-manager==4.0.1
+
+# Behave - Framework BDD (Behavior Driven Development)
+behave==1.2.6
+
+# Behave-html-formatter - Genera reportes HTML bonitos para Behave
+behave-html-formatter==0.9.10
+
+# Allure-behave - Integración con Allure para reportes avanzados (opcional)
+allure-behave==2.13.2
+
+# Pytest - Framework de pruebas alternativo (opcional)
+pytest==7.4.3
+
+# Pytest-html - Genera reportes HTML de las pruebas (opcional)
+pytest-html==4.1.1
+
+# Parse - Para parsing de parámetros en steps (incluido con Behave)
+parse==1.20.0
+
+# Parse-type - Extensión de parse para tipos personalizados
+parse-type==0.6.2

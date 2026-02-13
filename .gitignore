@@ -1,0 +1,49 @@
+# Archivos y carpetas a ignorar por Git
+# Si usas control de versiones
+
+# Entorno virtual
+venv/
+env/
+ENV/
+
+# Cache de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Archivos de prueba
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+
+# Reportes
+report.html
+reports/
+assets/
+
+# Behave
+allure-results/
+allure-report/
+*.json
+*.xml
+
+# Screenshots de fallos
+screenshot_*.png
+screenshots/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos temporales
+*.tmp
+*.bak
