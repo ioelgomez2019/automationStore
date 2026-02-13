@@ -131,7 +131,7 @@ AutoTestStore/
 ### Paso 1: Clonar el Repositorio
 
 **Opción A: Con Git**
-
+Estar en la carpeta donde vas a descargar el proyectoo
 ```powershell
 git clone https://github.com/ioelgomez2019/automationStore.git
 cd automationStore
@@ -218,13 +218,13 @@ test_e2e_smoke.bat               # Tests críticos (rápido)
 ```
 
 **O desde PowerShell:**// ejecutar
-```powershell
+```powershell *(solo si no esta activo el enteorno env)
 venv\Scripts\
 
-# Todos sin repotes
-behave
+# Todos sin repotes solicitado
+behave Scenarios/checkout/checkout.feature
 
-# Con reporte HTML / lo encuentras en  carpeta reporots
+# Con reporte HTML una vez ejecutado una prueba e2e sin reportes/ lo encuentras en  carpeta reporots
 behave -f behave_html_formatter:HTMLFormatter -o reports/behave_report.html
 
 # Solo críticos
