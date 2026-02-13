@@ -25,3 +25,4 @@ Característica: Login en SauceDemo # Scenarios/login/login.feature:3
     Dado abre la aplicacion                                  # Script/modules/features/login/loginStep.py:5
     Y el usuario ingresa su "standard_user" y "secret_sauce" # Script/modules/features/login/loginStep.py:12
     Entonces el usuario deberia ver la pagina de productos   # Script/modules/features/login/loginStep.py:20
+
