@@ -1,4 +1,4 @@
-# AutoTestStore - Sistema de Automatización BDD
+# AutoTestStore -Automtizacion con selenium y Python
 
 ## 📋 Objetivo
 
